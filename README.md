@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# しりとりアプリ（1人プレイWeb版）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🎯 概要
 
-## Available Scripts
+日本語しりとりを1人でプレイできるWebアプリケーションです。  
+ユーザーが自由に単語を入力し、しりとりのルール（語尾チェック・「ん」で終了・重複禁止）に従ってゲームが進行します。
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🛠 技術スタック
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| 区分       | 使用技術/ツール                     |
+|------------|--------------------------------------|
+| フロント   | React ,JavaScript             |
+| データ形式 | JSON                                 |
+| 状態管理   | useState, useEffect                  |
+| 辞書整形   | Python            |
+| 辞書元     | JLPT語彙リスト(https://github.com/elzup/jlpt-word-list?tab=readme-ov-file)        |
+| 実行環境   | CMD, ブラウザ   |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 📦 構成概要
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### フロント（React）
+- 入力フォームでユーザーが単語を送信
+- 辞書（JSON）と照合し、使用履歴と前単語の末尾と比較
+- ゲーム中の履歴表示、エラー表示、リセット機能あり
+- ひらがな入力のみに対応
 
-### `npm run build`
+### 辞書データ（words.json）
+- JSON 形式で読みと語彙を保持：
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```json
+[
+  { "word": "りんご"},
+  { "word": "ごりら"}
+]
