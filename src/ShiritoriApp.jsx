@@ -20,7 +20,7 @@ const ShiritoriApp = () => {
   const [message, setMessage] = useState("ゲームを始めよう!");
 
   useEffect(() => {
-    fetch("/words.json")
+    fetch(process.env.PUBLIC_URL +"/words.json")
       .then(res => res.json())
       .then(data => {
         const set = new Set(data.map(item => item.word));
