@@ -15,7 +15,7 @@
 | データ形式 | JSON                                 |
 | 状態管理   | useState, useEffect                  |
 | 辞書整形   | Python            |
-| 辞書元     | JLPT語彙リスト(https://github.com/elzup/jlpt-word-list?tab=readme-ov-file)        |
+| 辞書元     | 松下言語学習ラボ　重要度順語彙データベース(Top 60894)http://www17408ui.sakura.ne.jp/tatsum/database.html      |
 | 実行環境   | CMD, ブラウザ   |
 
 ---
