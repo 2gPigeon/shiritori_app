@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+const toKatakana = (str) =>
+  str.replace(/[\u3041-\u3096]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) + 0x60)
+  );
+
 const normalizeLastChar = (word) => {
-  const small = { 'ぁ':'あ', 'ぃ':'い', 'ぅ':'う', 'ぇ':'え', 'ぉ':'お', 'ゃ':'や', 'ゅ':'ゆ', 'ょ':'よ', 'っ':'つ' };
+  const small = { 'ァ':'ア', 'ィ':'イ', 'ゥ':'ウ', 'ェ':'エ', 'ォ':'オ', 'ャ':'ヤ', 'ュ':'ユ', 'ョ':'ヨ', 'ッ':'ツ' };
   let char = word.at(-1);
   if (char === 'ー') char = word.at(-2);
   return small[char] || char;
@@ -12,7 +17,7 @@ const ShiritoriApp = () => {
   const [history, setHistory] = useState([]);
   const [usedWords, setUsedWords] = useState(new Set());
   const [input, setInput] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("ゲームを始めよう!");
 
   useEffect(() => {
     fetch("/words.json")
@@ -33,28 +38,29 @@ const ShiritoriApp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const word = input.trim();
+    const katakanaInput = toKatakana(word);
     if (!word) return;
 
-    if (!dictSet.has(word)) {
+    if (!dictSet.has(katakanaInput)) {
       setMessage("辞書にない単語です");
       setInput("");
       return;
     }
-    if (usedWords.has(word)) {
+    if (usedWords.has(katakanaInput)) {
       setMessage("その単語はもう使いました、ゲームを終了します！");
       setUsedWords(new Set(usedWords).add(word));
       setHistory([...history, word]);
       return;
     }
-    if (normalizeLastChar(word) === "ん" || normalizeLastChar(word) === "ン") {
+    if (["ン", "ん"].includes(normalizeLastChar(katakanaInput))) {
       setMessage(`${word}で終了！「ん」が付きました`);
-      setUsedWords(new Set(usedWords).add(word));
-      setHistory([...history, word]);
+      setUsedWords(new Set(usedWords).add(katakanaInput));
+      setHistory([...history, word]); 
       return;
     }
     if (history.length > 0) {
-      const prev = normalizeLastChar(history.at(-1));
-      const current = word[0];
+      const prev = normalizeLastChar(toKatakana(history.at(-1)));
+      const current = katakanaInput[0];
       if (prev !== current) {
         setMessage(`「${prev}」から始まる言葉にしてね`);
         return;
@@ -68,7 +74,7 @@ const ShiritoriApp = () => {
 
     // OK
     const newSet = new Set(usedWords);
-    newSet.add(word);
+    newSet.add(katakanaInput);
     setUsedWords(newSet);
     setHistory([...history, word]);
     setInput("");
