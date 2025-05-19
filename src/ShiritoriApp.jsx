@@ -25,6 +25,18 @@ const ShiritoriApp = () => {
       .then(data => {
         const set = new Set(data.map(item => item.word));
         setDictSet(set);
+
+        let first = null;
+        for (let i = 0; i < 50; i++) {
+          const candidate = data[Math.floor(Math.random() * data.length)].word;
+          const firstChar = candidate[0];
+          const lastChar = candidate.at(-1);
+          if (firstChar !== "ン" && firstChar !== "ん" &&
+              lastChar !== "ン" && lastChar !== "ん") {
+            first = candidate;
+            break;
+          }
+        }
       });
   }, []);
 
