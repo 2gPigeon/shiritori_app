@@ -37,6 +37,12 @@ const ShiritoriApp = () => {
             break;
           }
         }
+        if (first) {
+          setHistory([first]);
+          setUsedWords(new Set([first]));
+        } else {
+          setMessage("適切な初期単語が見つかりませんでした");
+        }
       });
   }, []);
 
