@@ -68,12 +68,14 @@ const ShiritoriApp = () => {
       setMessage("その単語はもう使いました、ゲームを終了します！");
       setUsedWords(new Set(usedWords).add(word));
       setHistory([...history, word]);
+      setInput("");
       return;
     }
     if (["ン", "ん"].includes(normalizeLastChar(katakanaInput))) {
       setMessage(`${word}で終了！「ん」が付きました`);
       setUsedWords(new Set(usedWords).add(katakanaInput));
       setHistory([...history, word]); 
+      setInput("");
       return;
     }
     if (history.length > 0) {
@@ -81,6 +83,7 @@ const ShiritoriApp = () => {
       const current = katakanaInput[0];
       if (prev !== current) {
         setMessage(`「${prev}」から始まる言葉にしてね`);
+        setInput("");
         return;
       }
     }
