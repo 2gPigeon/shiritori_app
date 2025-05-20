@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const toKatakana = (str) =>
   str.replace(/[\u3041-\u3096]/g, (ch) =>
@@ -18,6 +19,8 @@ const ShiritoriApp = () => {
   const [usedWords, setUsedWords] = useState(new Set());
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("ゲームを始めよう!");
+  const [showRules, setShowRules] = useState(false);
+
 
   useEffect(() => {
     fetch(process.env.PUBLIC_URL +"/words.json")
@@ -47,10 +50,29 @@ const ShiritoriApp = () => {
   }, []);
 
   const resetGame = () => {
-    setHistory([]);
-    setUsedWords(new Set());
-    setInput("");
-    setMessage("ゲームをリスタートしました！");
+    if (dictSet.size === 0) return;
+
+    const wordsArray = Array.from(dictSet);
+    let first = null;
+
+    for (let i = 0; i < 50; i++) {
+      const candidate = wordsArray[Math.floor(Math.random() * wordsArray.length)];
+      const firstChar = candidate[0];
+      const lastChar = candidate.at(-1);
+      if (firstChar !== "ン" && firstChar !== "ん" &&
+          lastChar !== "ン" && lastChar !== "ん") {
+        first = candidate;
+        break;
+      }
+    }
+    if (first){
+      setHistory([first]);
+      setUsedWords(new Set(first));
+      setInput("");
+      setMessage("ゲームをリスタートしました！");
+    }else{
+      setMessage("初期単語が見つからない！")
+    }
   };
 
   const handleSubmit = (e) => {
@@ -104,6 +126,13 @@ const ShiritoriApp = () => {
 
   return (
     <div>
+      <button
+        className="btn btn-outline-info position-fixed"
+        style={{ right: "0%", top: "0%", zIndex: 1001 }}
+        onClick={() => setShowRules(!showRules)}
+      >
+        {showRules ? "閉じる" : "ルール"}
+      </button>
       <h1>しりとり</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
@@ -120,6 +149,19 @@ const ShiritoriApp = () => {
         ))}
       </ul>
       <button onClick={resetGame}>リセット</button>
+        <div
+          className={`position-fixed top-0 end-0 bg-light border-start p-3 shadow ${showRules ? 'd-block' : 'd-none'}`}
+          style={{ width: "300px", height: "100vh", zIndex: 1000 }}
+        >
+          <h5>しりとりのルール</h5>
+          <ul>
+            <li>最後の文字から始まる言葉をつなげます</li>
+            <li>同じ単語は使えません</li>
+            <li>「ん」「ン」で終わったらゲーム終了</li>
+            <li>辞書に存在しない語は無効です</li>
+            <li>1文字・無意味な語も不可</li>
+          </ul>
+        </div>
     </div>
   );
 };
