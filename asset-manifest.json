@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/shiritori_app/static/css/main.9d0934b1.css",
-    "main.js": "/shiritori_app/static/js/main.43bf7688.js",
+    "main.css": "/shiritori_app/static/css/main.bb7c49ed.css",
+    "main.js": "/shiritori_app/static/js/main.64250e8d.js",
     "static/js/453.d2637a44.chunk.js": "/shiritori_app/static/js/453.d2637a44.chunk.js",
     "index.html": "/shiritori_app/index.html",
-    "main.9d0934b1.css.map": "/shiritori_app/static/css/main.9d0934b1.css.map",
-    "main.43bf7688.js.map": "/shiritori_app/static/js/main.43bf7688.js.map",
+    "main.bb7c49ed.css.map": "/shiritori_app/static/css/main.bb7c49ed.css.map",
+    "main.64250e8d.js.map": "/shiritori_app/static/js/main.64250e8d.js.map",
     "453.d2637a44.chunk.js.map": "/shiritori_app/static/js/453.d2637a44.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d0934b1.css",
-    "static/js/main.43bf7688.js"
+    "static/css/main.bb7c49ed.css",
+    "static/js/main.64250e8d.js"
   ]
 }
