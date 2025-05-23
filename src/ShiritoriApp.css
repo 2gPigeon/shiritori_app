@@ -1,0 +1,8 @@
+.history-box {
+  max-height: 200px;
+  overflow-y: auto;
+}
+/* サイドバーアニメーション入れたい場合 */
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out;
+}

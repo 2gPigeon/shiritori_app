@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './ShiritoriApp.css';
 
 const toKatakana = (str) =>
   str.replace(/[\u3041-\u3096]/g, (ch) =>
@@ -89,19 +90,19 @@ const ShiritoriApp = () => {
     if (usedWords.has(katakanaInput)) {
       setMessage("その単語はもう使いました、ゲームを終了します！");
       setUsedWords(new Set(usedWords).add(word));
-      setHistory([...history, word]);
+      setHistory([word, ...history].slice(0, 10));
       setInput("");
       return;
     }
     if (["ン", "ん"].includes(normalizeLastChar(katakanaInput))) {
       setMessage(`${word}で終了！「ん」が付きました`);
       setUsedWords(new Set(usedWords).add(katakanaInput));
-      setHistory([...history, word]); 
+      setHistory([word, ...history].slice(0, 10));
       setInput("");
       return;
     }
     if (history.length > 0) {
-      const prev = normalizeLastChar(toKatakana(history.at(-1)));
+      const prev = normalizeLastChar(toKatakana(history[0]));
       const current = katakanaInput[0];
       if (prev !== current) {
         setMessage(`「${prev}」から始まる言葉にしてね`);
@@ -119,7 +120,7 @@ const ShiritoriApp = () => {
     const newSet = new Set(usedWords);
     newSet.add(katakanaInput);
     setUsedWords(newSet);
-    setHistory([...history, word]);
+    setHistory([word, ...history].slice(0, 10));
     setInput("");
     setMessage("OK！");
   };
@@ -145,7 +146,7 @@ const ShiritoriApp = () => {
       </form>
       <ul>
         {history.map((w, i) => (
-          <li key={i}>{w}</li>
+          <li key={i}>{w}{i === 0 && <span>⬅</span>}</li>
         ))}
       </ul>
       <button onClick={resetGame}>リセット</button>
