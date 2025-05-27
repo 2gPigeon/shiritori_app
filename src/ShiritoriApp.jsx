@@ -127,44 +127,43 @@ const ShiritoriApp = () => {
 
   return (
     <div>
-      <button
-        className="btn btn-outline-info position-fixed"
-        style={{ right: "0%", top: "0%", zIndex: 1001 }}
-        onClick={() => setShowRules(!showRules)}
-      >
-        {showRules ? "閉じる" : "ルール"}
-      </button>
-      <h1>しりとり</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={message.includes("終了")}
-        />
-        <button type="submit">送信</button>
-      </form>
-      <ul>
-        {history.map((w, i) => (
-          <li key={i}>{w}{i === 0 && <span>⬅</span>}</li>
-        ))}
-      </ul>
-      <button onClick={resetGame}>リセット</button>
-        <div
-          className={`position-fixed top-0 end-0 bg-light border-start p-3 shadow ${showRules ? 'd-block' : 'd-none'}`}
-          style={{ width: "300px", height: "100vh", zIndex: 1000 }}
+        <button
+          className="btn btn-outline-info position-fixed"
+          style={{ right: "0%", top: "0%", zIndex: 1100, fontSize:"1.2rem",padding:"0.6rem 1.2rem",minWidth:"100px" }}
+          onClick={() => setShowRules(!showRules)}
         >
-          <h5>しりとりのルール</h5>
-          <ul>
-            <li>前の単語の最後の文字から始まる単語を入力してください</li>
-            <li>ひらがな・カタカナでの入力に対応しています</li>
-            <li>一度入力された単語と同じ単語を使うとゲーム終了です</li>
-            <li>「ん」「ン」で終わったらゲーム終了です</li>
-            <li>辞書に存在しない語は無効です</li>
-            <li>辞書は「名詞」しか入っていません</li>
-            <li>1文字の入力は受け付けていません</li>
-          </ul>
-        </div>
+          {showRules ? "閉じる" : "ルール"}
+        </button>
+        <div className="app-container">
+        <h1>しりとり</h1>
+        <p>{message}</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={message.includes("終了")}
+          />
+          <button type="submit">送信</button>
+        </form>
+        <ul>
+          {history.map((w, i) => (
+            <li key={i}>{w}{i === 0 && <span>⬅</span>}</li>
+          ))}
+        </ul>
+        <button onClick={resetGame}>リセット</button>
+          <div className={`rule-sidebar ${showRules ? 'open' : ''}`}>
+            <h5>しりとりのルール</h5>
+            <ul>
+              <li>前の単語の最後の文字から始まる単語を入力してください</li>
+              <li>ひらがな・カタカナでの入力に対応しています</li>
+              <li>一度入力された単語と同じ単語を使うとゲーム終了です</li>
+              <li>「ん」 「ン」で終わったらゲーム終了です</li>
+              <li>辞書に存在しない語は無効です</li>
+              <li>辞書は「名詞」しか入っていません</li>
+              <li>1文字の入力は受け付けていません</li>
+            </ul>
+          </div>
+      </div>
     </div>
   );
 };

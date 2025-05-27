@@ -2,7 +2,59 @@
   max-height: 200px;
   overflow-y: auto;
 }
-/* サイドバーアニメーション入れたい場合 */
-.sidebar-transition {
+.app-container {
+  font-size: 1rem;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* スマホ～タブレット */
+@media (max-width: 768px) {
+  .app-container {
+    font-size: 1.2rem;
+  }
+}
+
+/* 小さめノートPC */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .app-container {
+    font-size: 1.4rem;
+  }
+}
+
+/* デスクトップ大画面 */
+@media (min-width: 1201px) {
+  .app-container {
+    font-size: 1.6rem;
+  }
+}
+input, button {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+ul {
+  font-size: 1em;
+}
+
+
+.rule-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: 80vw;
+  height: 100vh;
+  background-color: #f8f9fa;
+  border-left: 1px solid #ccc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 1000;
+
+  transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
+}
+
+.rule-sidebar.open {
+  transform: translateX(0);
 }
