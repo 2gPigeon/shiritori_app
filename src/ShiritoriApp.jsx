@@ -129,7 +129,7 @@ const ShiritoriApp = () => {
     <div>
         <button
           className="btn btn-outline-info position-fixed"
-          style={{ right: "0%", top: "0%", zIndex: 1100, fontSize:"1.2rem",padding:"0.6rem 1.2rem",minWidth:"100px" }}
+          style={{ right: "1rem", top: "0%", zIndex: 1100, fontSize:"1.2rem",padding:"0.6rem 1.2rem",minWidth:"100px" }}
           onClick={() => setShowRules(!showRules)}
         >
           {showRules ? "閉じる" : "ルール"}
